@@ -1,0 +1,8 @@
+<h1>Subs#show</h1>
+<%= @sub.title %> <br>
+<%= @sub.description %> <br>
+<% if @sub.moderator_id == current_user.id %>
+<%= link_to 'Edit Sub', edit_sub_url(@sub) %>
+<% end %><br>
+
+<%= button_to 'Create Post', new_post_url, method: :get, params: { sub_id: @sub.id } %>

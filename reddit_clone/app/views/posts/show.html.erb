@@ -1,0 +1,9 @@
+<h1><%= @post.title %></h1>
+<%= @post.url%> <br>
+<h3><%= @post.content %></h3> <br>
+Written By: <%= @post.author.username %>
+<br><br>
+Associated Subs <br>
+<% @post.subs.each do |sub| %>
+<%= link_to sub.title, sub %> <br>
+<% end %>
