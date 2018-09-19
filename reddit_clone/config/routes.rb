@@ -5,6 +5,18 @@ Rails.application.routes.draw do
   resources :subs, except: :destroy do
     resources :posts, only: :create
   end
-  resources :posts, except: :create
+  resources :posts, except: :create do
+    resources :comments
+    member do
+      post 'downvote'
+      post 'upvote'
+    end
+  end
   
+  resources :comments, only: [:create, :show] do
+    member do
+      post 'downvote'
+      post 'upvote'
+    end
+  end
 end

@@ -20,9 +20,25 @@ class Post < ApplicationRecord
   
   has_many :post_subs,
   foreign_key: :post_id,
-  class_name: :PostSub
+  class_name: :PostSub,
+  dependent: :destroy
   
   has_many :subs,
   through: :post_subs,
-  source: :sub
+  source: :sub,
+  dependent: :destroy
+  
+  has_many :comments
+  
+  has_many :votes, 
+  as: :votable,
+  class_name: :Vote
+  
+  def total_votes
+    sum = 0
+    self.votes.each do |vote|
+      sum += vote.value
+    end
+    sum
+  end
 end

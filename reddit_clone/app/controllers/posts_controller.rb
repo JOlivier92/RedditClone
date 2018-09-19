@@ -4,12 +4,25 @@ class PostsController < ApplicationController
   
   def show
     @post = Post.find(params[:id])
+    @all_comments = @post.comments.includes(:author)
   end
 
   def edit
     @post = Post.find(params[:id])
   end
-
+  
+  def upvote
+    @post = Post.find(params[:id])
+    vote = Vote.create!(user_id: current_user.id, votable_id: @post.id, value: 1)
+    redirect_to @post
+  end
+  
+  def downvote
+    @post = Post.find(params[:id])
+    vote = Vote.create!(user_id: current_user.id, votable_id: @post.id, value: -1)
+    redirect_to @post
+  end
+  
   def update
     @post = current_user.posts.find(params[:id])
     if @post

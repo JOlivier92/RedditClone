@@ -1,15 +1,18 @@
-<h1>Create A User</h1>
+<div class="sign-in">
+  <%= image_tag('reddit.png', height: '50', width: '50') %>
+  <h1 class="sign-in-title">Sign Up</h1>
 
-<form action="<%= users_url %>" method="post">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  
-  <label>Username
-    <input type="text" name="user[username]" value="">
-  </label><br>
-  
-  <label>Password
-    <input type="password" name="user[password]" value="">
-  </label><br>
-  
-  <input type="submit" value="Create User">
-</form>
+  <form class="sign-in-form" action="<%= users_url %>" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    
+    <label>Username
+      <input type="text" name="user[username]" value="">
+    </label><br>
+    
+    <label>Password
+      <input type="password" name="user[password]" value="">
+    </label><br>
+    
+    <input type="submit" value="Sign Up">
+  </form>
+</div>

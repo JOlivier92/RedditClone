@@ -1,9 +1,48 @@
-<h1><%= @post.title %></h1>
-<%= @post.url%> <br>
-<h3><%= @post.content %></h3> <br>
+<h1>Post Title <br><%= @post.title %></h1>
+Post URL: <%= @post.url%> <br>
+<h3><%= @post.content %></h3>
 Written By: <%= @post.author.username %>
 <br><br>
-Associated Subs <br>
+Associated Subs <br><br>
 <% @post.subs.each do |sub| %>
 <%= link_to sub.title, sub %> <br>
 <% end %>
+
+<form class="" action="<%= post_comments_url(@post) %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <label for="content">
+    <textarea name="comment[content]"></textarea><br>
+  </label>
+  <input type="submit" name="" value="Add Comment">
+</form>
+<h2> Upvote or Downvote </h2>
+<%= button_to 'Upvote', upvote_post_url(@post), method: :post %>
+<%= button_to 'Downvote', downvote_post_url(@post), method: :post %>
+Total Votes: <%= @post.total_votes %><br>
+<h2>Comments</h2>
+<% @all_comments.each do |comment| %> 
+  <% if comment.parent_comment_id == nil %>
+    <hr>
+    <%= comment.content %><br>
+    Written by: <%= comment.author.username %><br>
+    <% @all_comments.each do |child_comment| %>
+      <% if comment.id == child_comment.parent_comment_id %>
+        <div class="" style="margin-left: 30px;">
+          <%= child_comment.content %><br>
+          Written by: <%= child_comment.author.username %><br><br>
+        </div>
+      <% end %>
+    <% end %>
+    <form class="" action="<%= post_comments_url(@post) %>" method="post">
+      <input type="hidden" name="parent_comment_id" value="<%= comment.id %>">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <label for="content">
+        <textarea name="comment[content]"></textarea><br>
+      </label>
+      <input type="submit" name="" value="Add Child Comment">
+    </form>
+  <% end %>
+<% end %>
+
+<br><br>
+

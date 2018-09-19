@@ -17,11 +17,13 @@ class User < ApplicationRecord
   
   has_many :moderated_subs,
   foreign_key: :moderator_id,
-  class_name: :Sub
+  class_name: :Sub,
+  dependent: :destroy
 
   has_many :posts,
   foreign_key: :author_id,
-  class_name: :Post
+  class_name: :Post,
+  dependent: :destroy
   
   attr_reader :password
   after_initialize :ensure_session_token

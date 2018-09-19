@@ -13,3 +13,23 @@
  *= require_tree .
  *= require_self
  */
+
+.sign-in-title, .sign-in-form {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.sign-in-title {
+  top: 45%;
+}
+
+.sign-in img {
+  margin: 0;
+  position: absolute;
+  top: 44%;
+  left: 54%;
+  transform: translate(-50%, -50%);
+}
